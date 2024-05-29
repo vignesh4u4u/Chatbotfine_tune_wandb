@@ -1,4 +1,5 @@
 flask
+gevent
 pandas
 seaborn
 opencv-python
@@ -12,4 +13,10 @@ pdfminer.six
 docx2txt
 paddleocr
 paddlepaddle
+llama-cpp-python
 gradio
+llama-cpp-haystack
+
+
+
+#python -m pip install paddlepaddle -i https://pypi.tuna.tsinghua.edu.cn/simple
