@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Upload</title>
+    <style type="text/css">
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            text-align: center;
+            font-size: 24px;
+            color: blue;
+        }
+        pre {
+            white-space: pre-wrap;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+        }
+        form {
+            text-align: center;
+        }
+        input[type="file"] {
+            margin-top: 10px;
+        }
+        textarea {
+            margin-top: 10px;
+            width: 80%;
+            height: 100px;
+            resize: vertical;
+        }
+        button[type="submit"] {
+            margin-top: 10px;
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload a File</h1>
+    <form id="uploadForm" method="POST" enctype="multipart/form-data">
+        <label for="file">Choose a file to upload:</label>
+        <br>
+        <input type="file" id="file" name="file" accept=".pdf, .jpg, .jpeg, .png, .webp, .txt, .doc, .docx">
+        <br>
+        <label for="input_prompt">Enter your prompt:</label>
+        <br>
+        <textarea id="input_prompt" name="input_prompt"></textarea>
+        <br>
+        <button type="submit">Submit</button>
+    </form>
+    <h1>Result</h1>
+    <pre id="result">{{ text }}</pre>
+</body>
+</html>

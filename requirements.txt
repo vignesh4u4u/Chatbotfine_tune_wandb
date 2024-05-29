@@ -1,0 +1,15 @@
+flask
+pandas
+seaborn
+opencv-python
+pillow
+huggingface_hub
+transformers
+sentence-transformers
+faiss-cpu
+accelerate
+pdfminer.six
+docx2txt
+paddleocr
+paddlepaddle
+gradio
