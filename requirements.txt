@@ -5,6 +5,7 @@ seaborn
 opencv-python
 pillow
 huggingface_hub
+text_generation
 transformers
 sentence-transformers
 faiss-cpu

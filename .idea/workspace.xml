@@ -5,26 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bcbe1291-cf55-48eb-be8c-2d3fd04d17a2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/TASK 3a/llama-cpp-output.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TASK 3a/mistral_llama.cpp.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/.gitattributes" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/config.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q2_K.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q3_K_L.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q3_K_M.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q3_K_S.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q4_0.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q4_K_M.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q4_K_S.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q5_0.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q5_K_M.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q5_K_S.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q6_K.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mistral-7B-Instruct-v0.2-GGUF/mistral-7b-instruct-v0.2.Q8_0.gguf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Additional task/phi-3 fine tune.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +62,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/VigneshSubramani/Desktop/MAIN PROJECT/YOLOV8",
+    "last_opened_file_path": "C:/Users/VigneshSubramani/Desktop/AWS/LLM Task",
     "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable"
   }
 }]]></component>

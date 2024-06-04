@@ -19,7 +19,14 @@ from sentence_transformers import SentenceTransformer
 from huggingface_hub import InferenceClient
 
 sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
-client = InferenceClient("mistralai/Mixtral-8x7B-Instruct-v0.1")
+
+
+API_URL = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1"
+headers = {"Authorization": "Bearer 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"}
+
+def query(payload):
+    response = requests.post(API_URL, headers=headers, json=payload)
+    return response.json()
 
 def format_prompt(message, history):
     prompt = "<s>"
@@ -30,18 +37,24 @@ def format_prompt(message, history):
     return prompt
 
 generate_kwargs = dict(
-    temperature=0.7,
-    max_new_tokens=6000,
+    temperature=0.5,
+    max_new_tokens=3000,
     top_p=0.95,
-    repetition_penalty=1.1,
     do_sample=True,
     seed=42,
 )
 
 def generate_text(message, history):
     prompt = format_prompt(message, history)
-    output = client.text_generation(prompt, **generate_kwargs)
-    return output
+    payload = {
+        "inputs": prompt,
+        "parameters": generate_kwargs
+    }
+    response = query(payload)
+    generated_text = response[0]["generated_text"]
+    if "[/INST]" in generated_text:
+        generated_text = generated_text.split("[/INST]")[-1].strip()
+    return generated_text
 
 def get_text_embedding(input_text,history=[]):
     embedding = sbert_model.encode(input_text)
@@ -65,7 +78,7 @@ def create_the_vector_store_layer1(question,index,chunks,history=[]): # layer 1
 def generate_rag(question,index,chunks,history=[]): #layer 2
     question_embeddings = np.array([get_text_embedding(question)])
     question_embeddings.shape
-    D, I = index.search(question_embeddings, k=2)
+    D, I = index.search(question_embeddings, k=6)
     retrieved_chunk = [chunks[i] for i in I.tolist()[0]]
 
     prompt = f"""
@@ -79,7 +92,7 @@ def generate_rag(question,index,chunks,history=[]): #layer 2
     """
     summary = create_the_vector_store_layer1(question,index,chunks,history=[])
     answer = generate_text(prompt ,history=[])
-    return ({"summary":summary,"RAG_answer":answer})
+    return ({"RAG_answer":answer})
 
 app = Flask(__name__, template_folder="template")
 
@@ -112,7 +125,7 @@ def home():
 
             if not prompt:
                 return "Please provide the input prompt"
-            chunk_size = 2040
+            chunk_size = 2000
             chunks = [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
             text_embeddings = np.array([get_text_embedding(chunk) for chunk in chunks])
             d = text_embeddings.shape[1]
