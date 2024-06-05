@@ -22,7 +22,7 @@ sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": "Bearer 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"}
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
@@ -125,7 +125,7 @@ def home():
 
             if not prompt:
                 return "Please provide the input prompt"
-            chunk_size = 2000
+            chunk_size = 3000
             chunks = [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
             text_embeddings = np.array([get_text_embedding(chunk) for chunk in chunks])
             d = text_embeddings.shape[1]

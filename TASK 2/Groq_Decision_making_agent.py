@@ -53,7 +53,7 @@ def create_the_vector_store_layer1(question,index,chunks): # layer 1
 def generate_rag(question,index,chunks): #layer 2
     question_embeddings = np.array([get_text_embedding(question)])
     question_embeddings.shape
-    D, I = index.search(question_embeddings, k=6)
+    D, I = index.search(question_embeddings, k=2)
     retrieved_chunk = [chunks[i] for i in I.tolist()[0]]
 
     prompt = f"""

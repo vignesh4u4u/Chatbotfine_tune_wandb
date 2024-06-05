@@ -6,7 +6,7 @@ def split_into_chunks(text, chunk_size):
     return text_chunks
 
 text = "This is an example text that will be split into chunks."
-chunk_size = 3000
+chunk_size = 1000
 
 chunks = split_into_chunks(text, chunk_size)
 print(chunks)

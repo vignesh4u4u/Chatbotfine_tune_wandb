@@ -18,7 +18,7 @@ sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
 from text_generation import Client
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": "Bearer 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"}
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
@@ -53,7 +53,6 @@ def generate_text(message, history):
         generated_text = generated_text.split("[/INST]")[-1].strip()
     return generated_text
 
-text = extract_text("../pdf_files/dme_deloitte-global-minimum-tax-faq.pdf")
 
 def get_text_embedding(input_text,history=[]):
     embedding = sbert_model.encode(input_text)
@@ -93,6 +92,7 @@ def generate_rag(question,history=[]): #layer 2
     answer = generate_text(prompt , history=[])
     return ({"RAG_answer":answer,"summary":summary})
 
+text = extract_text("../pdf_files/dme_deloitte-global-minimum-tax-faq.pdf")
 
 chunk_size = 2500
 chunks = [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
