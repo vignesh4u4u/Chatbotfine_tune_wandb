@@ -17,6 +17,7 @@ paddlepaddle
 llama-cpp-python
 gradio
 llama-cpp-haystack
+groq
 
 
 

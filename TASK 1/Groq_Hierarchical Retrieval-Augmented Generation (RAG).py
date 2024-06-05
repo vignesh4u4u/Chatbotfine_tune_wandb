@@ -1,5 +1,6 @@
-#https://github.com/mistralai/mistral-inference
 import os
+import re
+from groq import Groq
 import warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="transformers.utils.generic")
 warnings.filterwarnings("ignore", category=FutureWarning)
@@ -15,51 +16,26 @@ from sentence_transformers import SentenceTransformer
 from pdfminer.high_level import extract_text
 
 sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
-from text_generation import Client
 
-API_URL = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1"
-headers = {"Authorization": "Bearer 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"}
 
-def query(payload):
-    response = requests.post(API_URL, headers=headers, json=payload)
-    return response.json()
-
-def format_prompt(message, history):
-    prompt = "<s>"
-    for user_prompt, bot_response in history:
-        prompt += f"[INST] {user_prompt} [/INST]"
-        prompt += f" {bot_response}  "
-    prompt += f"[INST] {message} [/INST]"
-    return prompt
-
-generate_kwargs = dict(
-    temperature=0.3,
-    max_new_tokens=3000,
-    top_p=0.95,
-    repetition_penalty=1.1,
-    do_sample=True,
-    seed=42,
-)
-
-def generate_text(message, history):
-    prompt = format_prompt(message, history)
-    payload = {
-        "inputs": prompt,
-        "parameters": generate_kwargs
-    }
-    response = query(payload)
-    generated_text = response[0]["generated_text"]
-    if "[/INST]" in generated_text:
-        generated_text = generated_text.split("[/INST]")[-1].strip()
-    return generated_text
+os.environ["GROQ_API_KEY"] ="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"
+client = Groq(api_key=os.environ["GROQ_API_KEY"])
 
 text = extract_text("../pdf_files/dme_deloitte-global-minimum-tax-faq.pdf")
+
+def generate_the_response(prompt):
+    chat_completion = client.chat.completions.create(
+        messages=[{"role": "user", "content": prompt}],
+        model="mixtral-8x7b-32768", seed=42, max_tokens=3500
+    )
+    answer_text = chat_completion.choices[0].message.content
+    return answer_text
 
 def get_text_embedding(input_text,history=[]):
     embedding = sbert_model.encode(input_text)
     return embedding.tolist()
 
-def create_the_vector_store_layer1(question,history=[]): # layer 1
+def create_the_vector_store_layer1(question): # layer 1
     question_embeddings = np.array([get_text_embedding(question)])
     question_embeddings.shape
     D, I = index.search(question_embeddings, k=2)
@@ -71,10 +47,10 @@ def create_the_vector_store_layer1(question,history=[]): # layer 1
     ---------------------
     Given the context information please summaries into give the text format.    
     """
-    answer = generate_text(prompt , history=[])
+    answer = generate_the_response(prompt)
     return answer
 
-def generate_rag(question,history=[]): #layer 2
+def generate_rag(question): #layer 2
     question_embeddings = np.array([get_text_embedding(question)])
     question_embeddings.shape
     D, I = index.search(question_embeddings, k=2)
@@ -89,12 +65,12 @@ def generate_rag(question,history=[]): #layer 2
     Query: {question}
     Answer:
     """
-    summary = create_the_vector_store_layer1(question,history=[])
-    answer = generate_text(prompt , history=[])
+    summary = create_the_vector_store_layer1(question)
+    answer = generate_the_response(prompt )
     return ({"RAG_answer":answer,"summary":summary})
 
 
-chunk_size = 2500
+chunk_size = 2800
 chunks = [text[i:i + chunk_size] for i in range(0, len(text), chunk_size)]
 
 text_embeddings = np.array([get_text_embedding(chunk) for chunk in chunks])
@@ -103,9 +79,6 @@ index = faiss.IndexFlatL2(d)
 index.add(text_embeddings)
 
 input_prompt = input("enter the query:")
-answer = generate_rag(input_prompt,history=[])
-print(answer)
 
-
-
-
+output_answer = generate_rag(input_prompt)
+print(output_answer)
