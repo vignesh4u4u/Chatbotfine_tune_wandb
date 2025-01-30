@@ -18,7 +18,7 @@ sbert_model = SentenceTransformer('all-MiniLM-L6-v2')
 from text_generation import Client
 
 API_URL = "https://api-inference.huggingface.co/models/mistralai/Mixtral-8x7B-Instruct-v0.1"
-headers = {"Authorization": "Bearer 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"}
+headers = {"Authorization": "api_key"}
 
 def query(payload):
     response = requests.post(API_URL, headers=headers, json=payload)
@@ -107,5 +107,20 @@ answer = generate_rag(input_prompt,history=[])
 print(answer)
 
 
+
+"""
+Why Use text_embeddings.shape[1] Instead of text_embeddings.shape[0]?
+In the line:
+
+python
+Copy
+Edit
+d = text_embeddings.shape[1]
+index = faiss.IndexFlatL2(d)
+text_embeddings.shape[1] represents the number of features (dimensions) of each embedding vector.
+text_embeddings.shape[0] represents the number of vectors (number of text chunks).
+Since FAISS operates on high-dimensional vectors, it needs to know the dimension (d) of each vector, not how many vectors exist.
+
+"""
 
 
