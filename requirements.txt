@@ -22,3 +22,5 @@ groq
 
 
 #python -m pip install paddlepaddle -i https://pypi.tuna.tsinghua.edu.cn/simple
+
+# https://docs.mistral.ai/guides/rag/
